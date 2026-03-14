@@ -254,7 +254,7 @@ The PyTorch pipeline achieved **better performance due to improved training desi
 | Training     | Within / cross subject | Subject dependent    |
 | Augmentation | Not emphasized         | Implemented          |
 | Scheduler    | Not specified          | Cosine LR            |
-| Accuracy     | Comparable performance | 55–65%               |
+| Accuracy     | 60-67% (For this data set) | 55–65%               |
 
 ---
 
