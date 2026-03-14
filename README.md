@@ -77,24 +77,50 @@ Only **EEG channels were used**. EOG channels were **removed during preprocessin
 
 ## EEGNet Architecture
 
+## EEGNet Architecture
+
 The implemented model follows the **EEGNet-8,2 configuration**, commonly used for SMR datasets.
 
 | Parameter     | Value |
 | ------------- | ----- |
-| F1            | 8     |
-| D             | 2     |
-| F2            | 16    |
+| F1(No. of Temporal Convolution kernals)          | 8     |
+| D (No. of Depthwise Spatial Convolution kernals)           | 2     |
+| F2 (No. of Separable Convolution kernals)            | 16    |
 | Kernel length | 32    |
 | Dropout       | 0.5   |
 
-Architecture structure:
-
-1. Temporal Convolution
-2. Depthwise Spatial Convolution
-3. Separable Convolution
-4. Classification Layer
-
 EEGNet uses **depthwise and separable convolutions to efficiently learn temporal and spatial EEG features while minimizing the number of parameters**.
+
+---
+
+### Architecture Layers
+
+**1. Temporal Convolution**
+Learns frequency-specific filters across time using a 1D convolution along the temporal axis.
+Captures oscillatory EEG patterns such as alpha, beta, and gamma rhythms.
+Kernel length of 32 corresponds to ~250ms at 128 Hz, aligning with typical ERP/SMR windows.
+
+**2. Depthwise Spatial Convolution**
+Applies a separate filter per temporal feature map across all EEG electrodes.
+Learns spatial relationships between channels — effectively acting as a learned spatial filter.
+Replaces manual feature engineering such as CSP (Common Spatial Patterns).
+
+**3. Separable Convolution**
+Combines a depthwise convolution followed by a pointwise convolution.
+Summarizes temporal dynamics while dramatically reducing parameter count.
+Improves generalization by decoupling spatial and temporal learning.
+
+**4. Classification Layer**
+Flattens the learned feature representations and passes them through a fully connected softmax layer.
+Outputs class probabilities for the four motor imagery tasks:
+Left Hand | Right Hand | Feet | Tongue
+
+---
+
+### Model Summary
+
+![Model Summary](TensorFlow-Implementation/Images/Model_summery.png)
+
 
 ---
 
