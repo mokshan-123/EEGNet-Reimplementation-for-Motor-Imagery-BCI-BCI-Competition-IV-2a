@@ -271,15 +271,6 @@ figures/
 
 ---
 
-## Future Improvements
-
-* Cross-subject generalization
-* EEGNet-4,2 vs EEGNet-8,2 comparison
-* Explainable AI for EEG (Grad-CAM)
-* Spectral feature visualization
-* Transfer learning for BCI
-
----
 
 ## Acknowledgements
 
